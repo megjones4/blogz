@@ -35,5 +35,32 @@ def blog():
         blogs = Blog.query.all()
         return render_template('blog.html', blogs=blogs)   
 
+
+@app.route('/newpost', methods=['GET', 'POST'])
+def new_post():
+    title_error = ''
+    body_error = ''
+
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        
+
+        if title == '':
+            title_error = "Please enter a title!"
+            return render_template('newpost.html', title_error=title_error)
+        
+        if body == '':
+            body_error = "Please enter some fascinating text!"
+            return render_template('newpost.html', body_error=body_error)
+
+        else:
+            blog = Blog(title, body)
+            db.session.add(blog)
+            db.session.commit()
+            return redirect('/blog')
+
+    return render_template('newpost.html')
+
 if __name__ == '__main__':
     app.run()
