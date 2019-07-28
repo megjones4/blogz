@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>My Blog Posts</h1>
-    <label>Current Blogs:</label>
+    <label><b>Current Blogs:</b></label>
 
     {% if blogs|length == 0 %}
     <p>No posts yet!</p>
@@ -10,9 +10,13 @@
 
         <ul>
             {% for blog in blogs %}
-                <h3>{{blog.title}}</h3>
+                <a href=/blog?id={{blog.id}}><h3>{{blog.title}}</h3>
                 <li>{{blog.body}}</li>
             {% endfor %}
-    {% endif %}
+    
         </ul>
+    {% endif %}
 {% endblock %}
+
+
+        

@@ -26,11 +26,12 @@ def index():
 def blog():
 
     if request.args:
-        id = request.args.get('id')
-        blog = Blog.query.get(id)
+        if request.args:
+            id = request.args.get('id')
+            blog = Blog.query.get(id)
 
-        return render_template('blog.html', blog=blog)
-
+        return render_template('indivblog.html', blog=blog)
+    
     else:
         blogs = Blog.query.all()
         return render_template('blog.html', blogs=blogs)   
@@ -58,7 +59,7 @@ def new_post():
             blog = Blog(title, body)
             db.session.add(blog)
             db.session.commit()
-            return redirect('/blog')
+            return redirect('/blog?id=' + str(blog.id))
 
     return render_template('newpost.html')
 
