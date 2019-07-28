@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <nav>
+            <a href="http://localhost:5000/blog">My Blogs!</a> |
+            <a href="http://localhost:5000/newpost">Add New Blog Entry</a>
+            </nav> 
+        <title>{{title}}</title>
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
