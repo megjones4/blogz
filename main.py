@@ -17,3 +17,23 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    blogs = Blog.query.all()
+    return render_template("blog.html", blogs=blogs)
+        
+@app.route('/blog', methods=['POST', 'GET'])
+def blog():
+
+    if request.args:
+        id = request.args.get('id')
+        blog = Blog.query.get(id)
+
+        return render_template('blog.html', blog=blog)
+
+    else:
+        blogs = Blog.query.all()
+        return render_template('blog.html', blogs=blogs)   
+
+if __name__ == '__main__':
+    app.run()
