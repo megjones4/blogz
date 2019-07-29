@@ -2,7 +2,7 @@
 <html>
     <head>
         <nav>
-            <a href="http://localhost:5000/blog">My Blogs!</a> |
+            <a href="http://localhost:5000/blog">Blogs!</a> |
             <a href="http://localhost:5000/newpost">Add New Blog Entry</a>
             </nav> 
         <title style="font-size:250%";></title><b>{{title}}</b></title>
@@ -10,9 +10,18 @@
             .error {
                 color: red;
             }
+            .post-author {
+                font style: italic;
+                font size: 8px;
+                color: blue;
+            }
         </style>
     </head>
 <body style="font-family:Calibri";>
+    <div>
+        <a href='/logout'>log out</a>
+    </div>
+
     
     {% block content %}
     {% endblock %}
