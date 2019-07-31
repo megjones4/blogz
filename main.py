@@ -32,14 +32,14 @@ class Blog(db.Model):
 
 @app.before_request 
 def require_login(): 
-    allowed_routes = ['login', 'blog', 'index', 'signup'] 
+    allowed_routes = ['login', 'blog', 'home', 'signup'] 
     if request.endpoint not in allowed_routes and 'username' not in session: 
         return redirect('/login')
 
 @app.route('/', methods=['POST', 'GET'])
-def index():
+def home():
     users = User.query.all()
-    return render_template('index.html', users=users)
+    return render_template('home.html', users=users)
     
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -81,11 +81,11 @@ def signup():
         existing_user = User.query.filter_by(username=username).first()
         
         if username == '': 
-            username_error = 'Please enter a valid email'
+            username_error = 'Please enter a valid username'
             return render_template('signup.html', username_error=username_error)
         
         if len(username) < 5:
-            username_error = 'Please enter a valid username'
+            username_error = 'Username must be longer than 5 characters.'
             return render_template('signup.html', username_error=username_error)
 
         if password == '':
@@ -105,8 +105,8 @@ def signup():
             return render_template('signup.html', verify_error=verify_error) 
         
         if existing_user:
-            username_error = 'This user already exists. Please login.'
-            return render_template('login.html', username_error=username_error)
+            username_error = 'Username already exists. Please login or choose a different username.'
+            return render_template('signup.html', username_error=username_error)
         
         if not existing_user:
             new_user = User(username, password)
