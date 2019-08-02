@@ -41,7 +41,7 @@ def home():
     users = User.query.all()
     return render_template('home.html', users=users)
     
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET']) 
 def login():
     username_error = ''
     password_error = ''
@@ -121,17 +121,17 @@ def signup():
 @app.route('/blog')
 def blog():
     id = request.args.get('id')
-    user = request.args.get('username')
-    users = User.query.all()
+    username = request.args.get('user')
+    owner = User.query.filter_by(username=username).first()
 
     if id:
         blog = Blog.query.get(id)
         return render_template('indivblog.html', blog=blog)
 
-    if user:
-        blogs = Blog.query.filter_by(owner_id=user).all()
-        username = User.query.filter_by(id=user).first()
-        return render_template('indivuser.html', blogs=blogs, user=username)
+    if username:
+        blogs = Blog.query.filter_by(owner=owner).all()
+        ##username = User.query.filter_by(id=user).first()
+        return render_template('indivuser.html', blogs=blogs)
 
     else:
         blogs = Blog.query.all()

@@ -8,17 +8,14 @@
             <h3><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h3>
             <p>{{blog.body}}</p>
             
-            <p class="post-author">written by</p>
+            <p class="post-author">written by
+               
+                        <a href="/blog?user={{blog.owner.username}}">{{blog.owner.username}}</a></p>
+                        <hr/>
+                 
                 
-            {% for user in users %}
-                <p><a href="/blog?username={{user.id}}">{{user.username}}</a></p>
-            {% endfor %}
-
-                
-        <hr/>
         {% endfor %}
-              
-    
+                 
             
 {% endblock %}
 
